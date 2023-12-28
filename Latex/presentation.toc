@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{ Introduction }{3}{0}{1}
+\beamer@sectionintoc {2}{Présentation du projet}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Présentation du capteur d'humidité funduino}{4}{0}{2}
+\beamer@subsectionintoc {2}{2}{Présentation du cablage}{5}{0}{2}
+\beamer@subsectionintoc {2}{3}{Demo}{6}{0}{2}
+\beamer@sectionintoc {3}{Conclusion}{7}{0}{3}

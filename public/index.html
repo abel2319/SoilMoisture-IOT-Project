@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body style="justify-content: center; background: url(intro.png); background-repeat: no-repeat;background-size: cover;" class="container">
+	<div style="background: rgba(250, 255, 255, 0.9); padding-left: 30px; margin-top: 200px; justify-content: center; text-align: center;">
+		<h1>Groupe 6: Abel KPOHINTO et Bénédite LOVI</h1>
+		<h2>Capteur d'himidté du sol</h2>
+ 		<h3></h3>
+		<div id='container'></div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+	import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+	const cont = document.getElementById("container")
+	console.log(cont)
+	// Paste the code from Firebase
+	const firebaseConfig = {
+		apiKey: "AIzaSyC-m7n5DNeaSMfrFu-7R4Snmj0axRFODP",
+		authDomain: "firebaseapp.com",
+           	databaseURL: "https://soilmoisture-65bd1-default-rtdb.europe-west1.firebasedatabase.app/",
+		projectId: "soilmoisture-65bd1",
+	};
+
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+
+
+	const dbRef = ref(getDatabase(app));
+	onValue(dbRef , (snapshot) => {
+  		if (snapshot.exists()) {
+			const data = snapshot.val()['Moisture'];
+			const val = data["value"];
+			if (val < 300){
+			  cont.innerHTML = `<h3 style="color:black;">valeur de l'humidité: <span style="color:red;">${data["value"]} (le sol est sec)</span> </h3>`;
+			} else if (val >= 300 && val < 600){
+			  cont.innerHTML = `<h3 style="color:black;">valeur de l'humidité: <span style="color:yellow;">${data["value"]} (le sol est peu humide)</span> </h3>`;
+			} else {
+			  cont.innerHTML = `<h3 style="color:black;">valeur de l'humidité: <span style="color:green;">${data["value"]} (le sol est humide)</span> </h3>`;
+			}
+  		}
+	});
+	</script>
+</body>
+</html>
